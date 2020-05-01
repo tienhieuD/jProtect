@@ -33,7 +33,11 @@ if __name__ == '__main__':  # RUN
     to_remove_files = []
     for file_path in files:
         if 'jprotect_' in file_path:
-            module_name = file_path.split(os.path.dirname(__file__))[-1].replace('\\', '.')[1:-3]
+            # print('fp: %s' % file_path)
+            # module_name = file_path.split(os.path.dirname(__file__))[-1].replace('\\', '.')[1:-3]
+            # print('os.path.dirname(__file__): %s' % os.path.dirname(__file__))
+            # print('file_path.split(os.path.dirname(__file__)): %s' % file_path.split(os.path.dirname(__file__)))
+            module_name = file_path[file_path.index('dist'):file_path.index('.py')].replace('\\', '.').replace('/', '.')
             ext_modules.append(Extension(module_name, [file_path]), )
             to_remove_files += [file_path]
     for extension in ext_modules:
